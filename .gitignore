@@ -1,0 +1,7 @@
+tags
+*.o
+output.*
+*.swp
+*.json
+bin
+obj
