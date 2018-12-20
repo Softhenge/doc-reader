@@ -147,12 +147,30 @@ std::vector<cv::Rect> Helper::getNearRightKeyCondidate(const cv::Rect& rect,
     return std::move(result);
 }
 
+void Helper::substractSubLines(std::vector<LINE>& result, const LINE& currentLine)
+{
+    auto xCoord = currentLine.front().x;
+    LINE line;
+    for (auto item : currentLine) {
+        if (item.x - xCoord > 120) {
+            result.push_back(line);
+            line.clear();
+        }
+        line.push_back(item);
+        xCoord = item.x;
+    }
+    result.push_back(line);
+}
+
 auto Helper::extractLines(std::vector<cv::Rect>& data) -> std::vector<LINE>
 {
     std::vector<LINE> result;
     if (data.empty()) {
         return result;
     }
+    auto compareByX = [](const cv::Rect& lhs, const cv::Rect& rhs) {
+        return lhs.x < rhs.x;
+    };
 
     while (!data.empty()) {
         LINE currentLine;
@@ -175,7 +193,9 @@ auto Helper::extractLines(std::vector<cv::Rect>& data) -> std::vector<LINE>
                 ++i;
             }
         }
-        result.push_back(currentLine);
+        std::sort(currentLine.begin(), currentLine.end(), compareByX);
+        substractSubLines(result, currentLine);
+//        result.push_back(currentLine);
     }
     return std::move(result);
 }

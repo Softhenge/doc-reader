@@ -7,9 +7,6 @@ namespace parser {
 
 enum class FormType : unsigned char
 {
-    DRIVING_ALBERTA,
-    DRIVING_ONTARIO,
-    DRIVING_QUEBEC
 };
 
 /**

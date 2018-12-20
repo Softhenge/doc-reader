@@ -96,5 +96,11 @@ static std::vector<cv::Rect> getNearRightKeyCondidate(const cv::Rect& rect,
  * @return extracted lines vector
  */
 static std::vector<LINE> extractLines(std::vector<cv::Rect>& data);
+
+/**
+ * @brief substractSubLines if one line contains
+ */
+static void substractSubLines(std::vector<LINE>& result, const LINE& currentLine);
+
 };
 

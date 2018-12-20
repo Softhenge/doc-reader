@@ -5,7 +5,7 @@ BINDIR     = bin
 DOXY       = ./docs/doxy
 OBJECTS    = $(SOURCES:.cpp:=.o)
 EXECUTABLE = doc-reader 
-CPPFLAGS   = -O3 -std=c++14 -Wall -Werror -g $(shell pkg-config --cflags tesseract)
+CPPFLAGS   = -O -std=c++14 -Wall -Werror -g $(shell pkg-config --cflags tesseract)
 LDFLAGS    =  $(shell pkg-config --libs opencv tesseract) -lpthread -lstdc++fs
 
 MOVED_OBJECTS =  $(addprefix $(OBJDIR)/, $(OBJECTS))
